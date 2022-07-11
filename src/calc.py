@@ -25,11 +25,9 @@ def cnts_sum(img, cnts):
 def cnt_lateral_length(cnt, n_iteration=10):
     cnt_area = cv2.contourArea(cnt)
     cnt_perimeter = cv2.arcLength(cnt, True)
-    l = cnt_perimeter / 2
-    for _ in range(n_iteration): 
-        dl = cnt_area / l
-        l = cnt_perimeter / 2 - dl
-    return l
+    l_0 = cnt_perimeter / 2
+    dl = (l_0 - np.sqrt(l_0 ** 2 - 4 * cnt_area)) / 2
+    return l_0 - dl
 
 
 def mb_surface_intensity(img, mb_cnts, bg_cnts):
